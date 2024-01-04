@@ -10,6 +10,7 @@ public class CommentService {
 
     public CommentService(CommentRepository commentRepository) {
         this.commentRepository = commentRepository;
+        System.out.println("CommentService instance created!");
     }
 
     public CommentRepository getCommentRepository() {
