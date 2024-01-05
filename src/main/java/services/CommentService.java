@@ -1,16 +1,25 @@
 package services;
 
+import model.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
-import repositories.CommentRepository;
+import processors.CommentProcessor;
 
 @Service
 public class CommentService {
 
     @Autowired
-    private CommentRepository commentRepository;
+    private ApplicationContext context;
 
-    public CommentRepository getCommentRepository() {
-        return commentRepository;
+    public void sendComment(Comment c) {
+        CommentProcessor p = context.getBean(CommentProcessor.class);
+
+        p.setComment(c);
+        p.processComment();
+        p.validateComment();
+
+        c = p.getComment();
+        // do something further
     }
 }
